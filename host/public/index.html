@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa/+esm",
+          "my-web-component": "http://localhost:8080/entryPoint.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to the Minimal Node.js Server!</h1>
+      <script src="main.js"></script>
+    </div>
+    <div class="container" id="angular-mf-container">
+      <my-first-web-component></my-first-web-component>
+    </div>
+    <!-- single-spa registration logic -->
+    <script type="module">
+      import { registerApplication, start } from "single-spa";
+
+      registerApplication({
+        name: "my-web-component",
+        app: async () => {
+          await import("my-web-component"); // just load the bundle (for now)
+          return {
+            bootstrap: () => Promise.resolve(),
+            mount: () => Promise.resolve(),
+            unmount: () => Promise.resolve(),
+          };
+        },
+        activeWhen: () => true, // Always active
+        customProps: {
+          domElementGetter: () =>
+            document.getElementById("angular-mf-container"),
+        },
+      });
+
+      start();
+    </script>
+  </body>
+</html>
