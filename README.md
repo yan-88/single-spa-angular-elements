@@ -14,7 +14,7 @@ This proof of concept (PoC) demonstrates how to use Angular Elements as a micro 
 ```
 cd wc-mf
 npm install
-npm run build
+ng build --output-hashing=none
 ```
 
 ### 2. Serve the Angular Web Component
