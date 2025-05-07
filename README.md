@@ -23,6 +23,8 @@ npm run build
 npx http-server ./dist/wc-app/browser/ --cors='*'
 ```
 
+This will serve the web component at a local port (e.g., http://localhost:8080).
+
 ### 3. Start the Host Application
 
 In a new terminal:
